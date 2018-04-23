@@ -1,6 +1,9 @@
+
 package sec;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -17,10 +20,20 @@ public class client
         try {
             Socket s=new Socket("localhost",9999);
             OutputStreamWriter os=new OutputStreamWriter(s.getOutputStream());
-            String st="krishna";
+            String st;
             PrintWriter pr=new PrintWriter(os);
-            os.write(st);
-            os.flush();
+            BufferedReader br=new 
+            BufferedReader(new InputStreamReader(System.in));
+            for(;;)
+            {
+                st=br.readLine();
+                os.write(st);
+                os.flush();
+                if(st.equals("end"))
+                    break;
+            }
+
+           
         } catch (IOException ex) {
             Logger.getLogger(client.class.getName()).log(Level.SEVERE, null, ex);
         }
